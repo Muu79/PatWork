@@ -21,10 +21,11 @@ public class PatientManager {
     public PatientManager() {
 
     }
+    DBConnect db = new DBConnect();
 
     public String getPatientTbl(String sql) {
         String temp = "";
-        DBConnect db = new DBConnect();
+        
         
         try {
             ResultSet rs = db.queryTbl(sql);
@@ -40,9 +41,27 @@ public class PatientManager {
                 temp += rs.getString(10) + "\t";
                 temp += "\n";
             }
+            rs.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return temp;
+    }
+    
+    public boolean login(String usr, String pass){
+        boolean ok = false;
+        try {            
+            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE PatientID = '"+usr+"'");
+            while(rs.next()){
+                if(rs.getString("Password").equals(pass)){
+                    ok = true;
+                }
+            }           
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ok;
     }
 }
