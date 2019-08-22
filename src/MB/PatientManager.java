@@ -58,18 +58,17 @@ public class PatientManager {
                     auth = 3;
                 }
             }
-        } 
-        
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             auth = 0;
         }
         try {
             ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE TrustedDoc = '" + usr + "'");
             while (rs.next()) {
-                ResultSet dl = db.queryTbl("SELECT * FROM Doctors WHERE DocID = '"+usr+"'");
-                while(rs.next()){
-                if(rs.getString("password").equals(pass))
-                    auth = 2;
+                ResultSet dl = db.queryTbl("SELECT * FROM Doctors WHERE DocID = '" + usr + "'");
+                while (rs.next()) {
+                    if (rs.getString("password").equals(pass)) {
+                        auth = 2;
+                    }
                 }
             }
         } catch (SQLException ex) {
@@ -88,8 +87,21 @@ public class PatientManager {
         } catch (SQLException ex) {
             auth = 0;
         }
-        
+
         return auth;
+    }
+
+    public boolean logExixts(String usr) {
+        try {
+            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE Username = '" + usr + "'");
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+    
+    public void updateTbl(String sql) throws SQLException{
+        db.queryTbl(sql);
     }
 
 }

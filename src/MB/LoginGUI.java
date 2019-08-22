@@ -101,6 +101,11 @@ public class LoginGUI extends javax.swing.JFrame {
         });
 
         registerbtn.setText("Register");
+        registerbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerbtnActionPerformed(evt);
+            }
+        });
 
         errText.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         errText.setForeground(new java.awt.Color(51, 255, 255));
@@ -201,6 +206,10 @@ public class LoginGUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_loginbtnActionPerformed
+
+    private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
+        RegisterScreenGUI reg = new RegisterScreenGUI();
+    }//GEN-LAST:event_registerbtnActionPerformed
 
     /**
      * @param args the command line arguments
