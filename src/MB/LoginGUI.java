@@ -58,7 +58,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 51, 51));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 48)); // NOI18N
@@ -184,13 +184,19 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_userTxtKeyPressed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-
-        if (pm.login(userTxt.getText(), passTxt.getText())) {
-            username = userTxt.getText();
-            MainScreenGUI msc = new MainScreenGUI();
+        username = userTxt.getText();
+        if (pm.login(username, passTxt.getText())>1) {          
+            MainScreenGUI msc = new MainScreenGUI(username,pm.login(username ,passTxt.getText()));
             msc.setVisible(true);
             this.dispose();
-        } else {
+        } 
+        else if(pm.login(username)>0&&passTxt.getText().equals("")){
+            MainScreenGUI msc = new MainScreenGUI(username,pm.login(username));
+            msc.setVisible(true);
+            this.dispose();
+        }
+        else {
+            passTxt.setText("");
             errText.setText("Username Or Password Is Incorrect");
         }
 

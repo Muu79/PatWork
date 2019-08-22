@@ -25,8 +25,7 @@ public class PatientManager {
 
     public String getPatientTbl(String sql) {
         String temp = "";
-        
-        
+
         try {
             ResultSet rs = db.queryTbl(sql);
 
@@ -42,26 +41,55 @@ public class PatientManager {
                 temp += "\n";
             }
             rs.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return temp;
     }
-    
-    public boolean login(String usr, String pass){
-        boolean ok = false;
-        try {            
-            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE PatientID = '"+usr+"'");
-            while(rs.next()){
-                if(rs.getString("Password").equals(pass)){
-                    ok = true;
+
+    public int login(String usr, String pass) {
+        int auth = 0;
+        try {
+            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE Username = '" + usr + "'");
+            while (rs.next()) {
+                if (rs.getString("Password").equals(pass)) {
+                    auth = 3;
                 }
-            }           
-        } catch (SQLException ex) {
-            Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        
+        catch (SQLException ex) {
+            auth = 0;
         }
-        return ok;
+        try {
+            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE TrustedDoc = '" + usr + "'");
+            while (rs.next()) {
+                ResultSet dl = db.queryTbl("SELECT * FROM Doctors WHERE DocID = '"+usr+"'");
+                while(rs.next()){
+                if(rs.getString("password").equals(pass))
+                    auth = 2;
+                }
+            }
+        } catch (SQLException ex) {
+            auth = 0;
+        }
+        return auth;
     }
+
+    public int login(String usr) {
+        int auth = 0;
+        try {
+            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE Username = '" + usr + "'");
+            while (rs.next()) {
+                auth = 1;
+            }
+        } catch (SQLException ex) {
+            auth = 0;
+        }
+        
+        return auth;
+    }
+
 }
