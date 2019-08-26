@@ -70,7 +70,6 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
         });
 
         userTxt.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
-        userTxt.setForeground(new java.awt.Color(255, 255, 255));
         userTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userTxtActionPerformed(evt);
@@ -146,14 +145,21 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
 
     private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
        PatientManager pm = new PatientManager();
-        if(passTxt.getText().equals(passConTxt.getText())&&!pm.logExixts(userTxt.getText())){
+        if(passTxt.getText().equals(passConTxt.getText())&&pm.logExixts(userTxt.getText())==false){
            try {
                String username = userTxt.getText();
-               pm.updateTbl("INSERT INTO Patients(Username, Password) VALUES('"+username+"','"+passTxt.getPassword()+"')");
+               System.out.println("INSERT INTO Patients(Username, Password) VALUES('"+username+"','"+passTxt.getText()+"')");
+               pm.updateTbl("INSERT INTO Patients(Username, Password) VALUES('"+username+"','"+passTxt.getText()+"')");
+               MainScreenGUI lo = new MainScreenGUI(username, 3);
+               this.dispose();
+               lo.setVisible(true);
            } catch (SQLException ex) {
                System.out.println("Error with Insert Statment");
            }
             
+        }
+        else{
+            System.out.println("Opps");
         }
     }//GEN-LAST:event_registerbtnActionPerformed
 

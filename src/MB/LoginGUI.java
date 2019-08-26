@@ -209,6 +209,8 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
         RegisterScreenGUI reg = new RegisterScreenGUI();
+        reg.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_registerbtnActionPerformed
 
     /**

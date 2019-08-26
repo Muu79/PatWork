@@ -94,7 +94,9 @@ public class PatientManager {
     public boolean logExixts(String usr) {
         try {
             ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE Username = '" + usr + "'");
-            return true;
+            while(rs.next()){
+                return true;
+            }
         } catch (SQLException ex) {
             return false;
         }
