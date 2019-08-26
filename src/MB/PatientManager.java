@@ -97,13 +97,14 @@ public class PatientManager {
             while(rs.next()){
                 return true;
             }
+            return false;
         } catch (SQLException ex) {
             return false;
         }
     }
     
     public void updateTbl(String sql) throws SQLException{
-        db.queryTbl(sql);
+        db.updateTbl(sql);
     }
 
 }

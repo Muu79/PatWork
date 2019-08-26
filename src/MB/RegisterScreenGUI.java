@@ -145,6 +145,8 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
 
     private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
        PatientManager pm = new PatientManager();
+       passTxt.setText("");
+       passConTxt.setText("");
         if(passTxt.getText().equals(passConTxt.getText())&&pm.logExixts(userTxt.getText())==false){
            try {
                String username = userTxt.getText();
