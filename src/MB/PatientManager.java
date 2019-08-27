@@ -56,23 +56,30 @@ public class PatientManager {
             while (rs.next()) {
                 if (rs.getString("Password").equals(pass)) {
                     auth = 3;
+                    return auth;
                 }
             }
+            
         } catch (SQLException ex) {
             auth = 0;
         }
+        
         try {
-            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE TrustedDoc = '" + usr + "'");
-            while (rs.next()) {
-                ResultSet dl = db.queryTbl("SELECT * FROM Doctors WHERE DocID = '" + usr + "'");
-                while (rs.next()) {
-                    if (rs.getString("password").equals(pass)) {
-                        auth = 2;
-                    }
+            ResultSet nrs = db.queryTbl("SELECT * FROM Doctors");
+            System.out.println(nrs.getString(1));
+            while(nrs.next()){
+                ResultSet ptd = db.queryTbl("SELECT TrustedDoc FROM Patients WHERE Username = '"+usr+"'");
+                System.out.println(nrs.getString("DoctorID"));
+                if(ptd.getString("TrustedDoc").equals(nrs.getString("DoctorID"))){
+                    System.out.println("Success?");
+                    auth = 2;
+                    return auth;
                 }
+            
             }
-        } catch (SQLException ex) {
+        } catch (Exception e) {
             auth = 0;
+            System.out.println("PROMBLEM");
         }
         return auth;
     }
@@ -94,7 +101,7 @@ public class PatientManager {
     public boolean logExixts(String usr) {
         try {
             ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE Username = '" + usr + "'");
-            while(rs.next()){
+            while (rs.next()) {
                 return true;
             }
             return false;
@@ -102,8 +109,8 @@ public class PatientManager {
             return false;
         }
     }
-    
-    public void updateTbl(String sql) throws SQLException{
+
+    public void updateTbl(String sql) throws SQLException {
         db.updateTbl(sql);
     }
 
