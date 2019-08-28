@@ -8,6 +8,9 @@ package MB;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 
 /**
  *
@@ -21,6 +24,8 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
     public RegisterScreenGUI() {
         initComponents();
     }
+    PassGen reg = new PassGen();
+    String regCode = reg.makeCode();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,6 +36,13 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        recCode = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        recCodeText = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -40,6 +52,80 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
         passTxt = new javax.swing.JPasswordField();
         passConTxt = new javax.swing.JPasswordField();
         userTxt = new javax.swing.JTextField();
+
+        jPanel2.setBackground(new java.awt.Color(255, 51, 51));
+
+        jLabel5.setFont(new java.awt.Font("Eras Medium ITC", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("RECOVERY CODE!!!");
+
+        recCodeText.setForeground(new java.awt.Color(255, 255, 255));
+        recCodeText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("This is Your Recovery Code, Keep It Safe To Recover Your Account");
+
+        jButton1.setText("Continue");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Copy To Clipboard");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(recCodeText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jButton1)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(12, 12, 12)
+                .addComponent(recCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout recCodeLayout = new javax.swing.GroupLayout(recCode.getContentPane());
+        recCode.getContentPane().setLayout(recCodeLayout);
+        recCodeLayout.setHorizontalGroup(
+            recCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        recCodeLayout.setVerticalGroup(
+            recCodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,26 +230,41 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_userTxtActionPerformed
 
     private void registerbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbtnActionPerformed
-       PatientManager pm = new PatientManager();
-       passTxt.setText("");
-       passConTxt.setText("");
-        if(passTxt.getText().equals(passConTxt.getText())&&pm.logExixts(userTxt.getText())==false){
-           try {
-               String username = userTxt.getText();
-               System.out.println("INSERT INTO Patients(Username, Password) VALUES('"+username+"','"+passTxt.getText()+"')");
-               pm.updateTbl("INSERT INTO Patients(Username, Password) VALUES('"+username+"','"+passTxt.getText()+"')");
-               MainScreenGUI lo = new MainScreenGUI(username, 3);
-               this.dispose();
-               lo.setVisible(true);
-           } catch (SQLException ex) {
-               System.out.println("Error with Insert Statment");
-           }
-            
-        }
-        else{
+        PatientManager pm = new PatientManager();
+        
+        
+        
+        if (passTxt.getText().equals(passConTxt.getText()) && pm.logExixts(userTxt.getText()) == false) {
+            try {
+                String username = userTxt.getText();
+                System.out.println("INSERT INTO Patients(Username, Password, RecoveryCode)\nVALUES('" + username + "','" + passTxt.getText() + "', '"+regCode+"');");
+                pm.updateTbl("INSERT INTO Patients (Username, Password, RecoveryCode)\nVALUES('" + username + "','" + passTxt.getText() + "', '"+regCode+"');");
+                recCode.setVisible(true);           
+                recCode.setSize(350,350);
+                recCodeText.setText(regCode);
+            } catch (SQLException ex) {
+                System.out.println("Error with Insert Statment");
+            }
+
+        } else {
             System.out.println("Opps");
         }
+        passTxt.setText("");
+        passConTxt.setText("");
     }//GEN-LAST:event_registerbtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MainScreenGUI lo = new MainScreenGUI(userTxt.getText(), 3);
+               this.dispose();
+               recCode.dispose();
+               lo.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        StringSelection stringSelection = new StringSelection(regCode);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,13 +302,20 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField passConTxt;
     private javax.swing.JPasswordField passTxt;
+    private javax.swing.JDialog recCode;
+    private javax.swing.JLabel recCodeText;
     private javax.swing.JButton registerbtn;
     private javax.swing.JTextField userTxt;
     // End of variables declaration//GEN-END:variables

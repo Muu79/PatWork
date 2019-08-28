@@ -17,9 +17,13 @@ import java.util.logging.Logger;
 public class PatientManager {
 
     //Fields
+    String username;
     //Constructor
     public PatientManager() {
 
+    }
+    public PatientManager(String user){
+        username = user;
     }
     DBConnect db = new DBConnect();
 
@@ -112,6 +116,25 @@ public class PatientManager {
 
     public void updateTbl(String sql) throws SQLException {
         db.updateTbl(sql);
+    }
+    public boolean changePassword(String rec, String pass){
+        boolean temp = false;
+        try{
+            ResultSet rs = db.queryTbl("SELECT * FROM Patients WHERE Username = '"+username+"'");
+            System.out.println("No Issue With SQL");
+            while(rs.next()){
+                if(rs.getString("RecoveryCode").equals(rec)){
+                    db.updateTbl("UPDATE Patients SET Password = '"+pass+"' WHERE Username = '"+username+"'");
+                    System.out.println("Success");
+                    temp = true;
+                }
+            }
+        }
+        catch (SQLException ex) {
+            System.out.println("Issue with SQL :(");
+        }
+        return temp;
+       
     }
 
 }

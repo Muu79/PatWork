@@ -38,7 +38,8 @@ public class DBConnect {
 
     public void updateTbl(String update) throws SQLException {
         Statement stmt = conn.createStatement();
-        stmt.executeUpdate(update);
+        
+        stmt.execute(update);
         stmt.close();
 
     }
