@@ -324,7 +324,7 @@ public class LoginGUI extends javax.swing.JFrame {
         if(frgPassText.getText().equals(frgConfPassTxt.getText())&&!frgUserTxt.getText().equals("")){
             try{
                 PatientManager pm = new PatientManager(frgUserTxt.getText());
-                if(pm.changePassword( frgRecCodeTxt.getText(),frgUserTxt.getText())){
+                if(pm.changePassword( frgRecCodeTxt.getText(),frgPassText.getText())){
                     forgotPasswordScreen.dispose();
                 }
                 else{
