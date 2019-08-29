@@ -33,7 +33,6 @@ public class LoginGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        registerScreen = new javax.swing.JDialog();
         forgotPasswordScreen = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -57,17 +56,6 @@ public class LoginGUI extends javax.swing.JFrame {
         registerbtn = new javax.swing.JButton();
         errText = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-
-        javax.swing.GroupLayout registerScreenLayout = new javax.swing.GroupLayout(registerScreen.getContentPane());
-        registerScreen.getContentPane().setLayout(registerScreenLayout);
-        registerScreenLayout.setHorizontalGroup(
-            registerScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        registerScreenLayout.setVerticalGroup(
-            registerScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         jPanel2.setBackground(new java.awt.Color(255, 51, 51));
 
@@ -411,7 +399,6 @@ public class LoginGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton loginbtn;
     private javax.swing.JPasswordField passTxt;
-    private javax.swing.JDialog registerScreen;
     private javax.swing.JButton registerbtn;
     private javax.swing.JTextField userTxt;
     // End of variables declaration//GEN-END:variables
