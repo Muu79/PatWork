@@ -293,12 +293,12 @@ public class LoginGUI extends javax.swing.JFrame {
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
         username = userTxt.getText();
         if (pm.login(username, passTxt.getText())>1) {          
-            MainScreenGUI msc = new MainScreenGUI(username,pm.login(username ,passTxt.getText()));
+            MainScreenGUItab1 msc = new MainScreenGUItab1(username,pm.login(username ,passTxt.getText()));
             msc.setVisible(true);
             this.dispose();
         } 
         else if(pm.login(username)>0&&passTxt.getText().equals("")){
-            MainScreenGUI msc = new MainScreenGUI(username,pm.login(username));
+            MainScreenGUItab1 msc = new MainScreenGUItab1(username,pm.login(username));
             msc.setVisible(true);
             this.dispose();
         }

@@ -254,7 +254,7 @@ public class RegisterScreenGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_registerbtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MainScreenGUI lo = new MainScreenGUI(userTxt.getText(), 3);
+        MainScreenGUItab1 lo = new MainScreenGUItab1(userTxt.getText(), 3);
                this.dispose();
                recCode.dispose();
                lo.setVisible(true);
